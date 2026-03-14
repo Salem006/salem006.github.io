@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portafolio — Zuleyka Ortiz</title>
+  <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-top: #b8c8d8;
+      --bg-mid: #cdd8e3;
+      --bg-bottom: #dde6ed;
+      --text-white: #ffffff;
+      --text-light: rgba(255,255,255,0.75);
+      --text-dim: rgba(255,255,255,0.55);
+      --accent: rgba(255,255,255,0.18);
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      font-family: 'Manrope', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      background: radial-gradient(ellipse at 60% 0%, #aec2d5 0%, #b8ccd8 25%, #c8d8e5 50%, #d8e4ee 70%, #e4edf4 100%);
+      position: relative;
+    }
+
+    /* Atmospheric noise/grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Soft vignette / atmospheric depth */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, transparent 40%, rgba(140,165,185,0.3) 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── CONTAINER ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 780px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 40px 60px;
+    }
+
+    /* ── BADGE / SUPERSCRIPT ICON ── */
+    .badge {
+      position: absolute;
+      top: 80px;
+      right: 40px;
+      width: 30px;
+      height: 30px;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.8s forwards;
+    }
+
+    .badge svg {
+      width: 14px;
+      height: 14px;
+      stroke: rgba(255,255,255,0.7);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+    }
+
+    /* ── HERO HEADLINE ── */
+    .hero-title {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(72px, 14vw, 110px);
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: var(--text-white);
+      text-align: center;
+      line-height: 1;
+      margin-bottom: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: riseIn 1s cubic-bezier(0.22, 1, 0.36, 1) 0.1s forwards;
+      text-shadow:
+        0 2px 40px rgba(100,140,170,0.25),
+        0 1px 0 rgba(255,255,255,0.2);
+      position: relative;
+    }
+
+    /* Superscript plus symbol beside the title */
+    .hero-title sup {
+      font-size: 0.28em;
+      font-weight: 300;
+      vertical-align: super;
+      border: 1.5px solid rgba(255,255,255,0.55);
+      border-radius: 5px;
+      padding: 2px 5px;
+      margin-left: 6px;
+      letter-spacing: 0;
+      color: rgba(255,255,255,0.8);
+      position: relative;
+      top: 0.2em;
+    }
+
+    /* ── SUBTITLE / NAME ── */
+    .subtitle {
+      font-size: clamp(13px, 2vw, 15px);
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-light);
+      text-align: center;
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+      margin-bottom: 28px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.65s forwards;
+    }
+
+    /* ── NAME BLOCK ── */
+    .name-block {
+      text-align: center;
+      margin-bottom: 18px;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.7s forwards;
+      position: relative;
+    }
+
+    .name-block::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100vw;
+      height: 100vh;
+      background-image: url('fotos/cadenas.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: -1;
+      opacity: 0.3;
+    }
+
+    .name-block h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: var(--text-white);
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── DESCRIPTION TEXT ── */
+    .description {
+      max-width: 460px;
+      text-align: center;
+      font-size: clamp(12.5px, 1.8vw, 14px);
+      font-weight: 600;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      opacity: 0;
+      animation: fadeIn 1s ease 0.85s forwards;
+    }
+
+    .description strong {
+      color: rgba(255,255,255,0.85);
+      font-weight: 800;
+    }
+
+    /* ── PROFILE IMAGE ── */
+    .profile-image {
+      max-width: 280px;
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      margin-top: 48px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+      box-shadow: 0 10px 40px rgba(100,140,170,0.2);
+    }
+
+    /* ── ATMOSPHERIC BOTTOM MIST ── */
+    .mist {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 45%;
+      background: linear-gradient(to top,
+        rgba(210,225,237,0.55) 0%,
+        rgba(210,225,237,0.3) 30%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── AMBIENT LIGHT ORBS ── */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0;
+      animation: fadeIn 2s ease 1s forwards;
+    }
+
+    .orb-1 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(180,205,225,0.35) 0%, transparent 70%);
+      top: -80px;
+      left: -100px;
+    }
+
+    .orb-2 {
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(200,220,240,0.25) 0%, transparent 70%);
+      bottom: 0;
+      right: -120px;
+    }
+
+    /* ── KEYFRAMES ── */
+    @keyframes riseIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    /* ── DYNAMIC MIST WITH SCROLL ── */
+    .dynamic-mist {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60%;
+      background: linear-gradient(to top,
+        rgba(60,100,140,0.6) 0%,
+        rgba(80,120,160,0.4) 25%,
+        rgba(100,140,180,0.2) 50%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+      will-change: transform;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .wrapper {
+        padding: 60px 24px 40px;
+      }
+
+      .badge {
+        top: 60px;
+        right: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient orbs for atmospheric depth -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="mist"></div>
+  <div class="dynamic-mist"></div>
+
+  <div class="wrapper">
+
+    <!-- Small rounded badge — top right, mimics the original + icon -->
+    <div class="badge">
+      <svg viewBox="0 0 14 14"><line x1="7" y1="2" x2="7" y2="12"/><line x1="2" y1="7" x2="12" y2="7"/></svg>
+    </div>
+
+    <!-- Main headline -->
+    <h1 class="hero-title">PORTAFOLIO<sup>+</sup></h1>
+
+    <!-- Subtitle line (replaces "Total Swap Volume") -->
+    <p class="subtitle">Creación & Diseño</p>
+
+    <!-- Subtle vertical divider -->
+    <div class="divider"></div>
+
+    <!-- Name -->
+    <div class="name-block">
+      <h2>ZULEYKA ORTIZ</h2>
+    </div>
+
+    <!-- Bio paragraph -->
+    <p class="description">
+      Diseñadora y desarrolladora, soy una persona que explora la creatividad
+      para construir mundos nuevos, <strong>tangibles, y útiles.</strong>
+    </p>
+
+    <!-- Profile image -->
+    <img src="fotos/foto1cara.png" alt="Zuleyka Ortiz" class="profile-image">
+
+  </div>
+
+  <script>
+    // Dynamic mist parallax effect on scroll
+    window.addEventListener('scroll', function() {
+      const scrollY = window.scrollY;
+      const dynamicMist = document.querySelector('.dynamic-mist');
+      dynamicMist.style.transform = `translateY(${scrollY * 0.5}px)`;
+    });
+  </script>
+
+</body>
+</html>

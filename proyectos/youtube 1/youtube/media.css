@@ -1,0 +1,645 @@
+/* Media Queries para Responsive Design */
+
+/* Tablets - 1024px */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .videos-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+/* Tablets - 768px */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: nowrap;
+        gap: 10px;
+    }
+
+    .header-container-1 {
+        flex: 1;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-container-2 {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .search-bar {
+        max-width: none;
+        flex: 0;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .search-bar input {
+        display: none;
+    }
+
+    .search-btn {
+        background-color: transparent;
+        font-size: 20px;
+        padding: 8px;
+    }
+
+    .header-container-2 {
+        display: none;
+    }
+
+    /* SIDEBAR COMO DRAWER */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 56px;
+        height: calc(100vh - 56px);
+        width: 240px;
+        background-color: #181818;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        border-right: 1px solid #3a3a3a;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-section {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #3a3a3a;
+        padding: 8px 0;
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+    }
+
+    .sidebar-title {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #aaa;
+        padding: 8px 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: #aaa;
+        flex-direction: row;
+        white-space: normal;
+    }
+
+    .sidebar-item:hover {
+        background-color: #272727;
+        color: #fff;
+    }
+
+    .sidebar-item .label {
+        font-size: 14px;
+    }
+
+    .videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .shorts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+
+    .home-content {
+        padding: 12px;
+    }
+}
+
+/* Móviles - 425px */
+@media (max-width: 425px) {
+    .main-container {
+        flex-direction: column;
+    }
+
+    .header {
+        flex-wrap: nowrap;
+        padding: 8px 12px;
+        gap: 8px;
+    }
+
+    .header-container-1 {
+        flex: 1;
+        gap: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    .header-container-2 {
+        display: none;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .logo {
+        gap: 4px;
+        font-size: 16px;
+    }
+
+    .logo-icon {
+        font-size: 18px;
+    }
+
+    .search-bar {
+        max-width: none;
+        flex: 0;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+    }
+
+    .search-bar input {
+        display: none;
+    }
+
+    .search-btn {
+        background-color: transparent;
+        font-size: 20px;
+        padding: 8px;
+    }
+
+    /* SIDEBAR COMO DRAWER */
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 56px;
+        height: calc(100vh - 56px);
+        width: 240px;
+        background-color: #181818;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        border-right: 1px solid #3a3a3a;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-section {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #3a3a3a;
+        padding: 8px 0;
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+    }
+
+    .sidebar-title {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #aaa;
+        padding: 8px 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: #aaa;
+        flex-direction: row;
+        white-space: normal;
+    }
+
+    .sidebar-item:hover {
+        background-color: #272727;
+        color: #fff;
+    }
+
+    .sidebar-item .label {
+        font-size: 14px;
+    }
+
+    .sidebar-item .icon {
+        font-size: 20px;
+    }
+
+    .sidebar-item .icon-img {
+        width: 18px;
+        height: 18px;
+    }
+
+    .sidebar-item .label {
+        font-size: 9px;
+        text-align: center;
+    }
+
+    .home-content {
+        flex: 1;
+        padding: 8px;
+    }
+
+    .content-section h2 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .videos-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .shorts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 8px;
+    }
+
+    .video-thumbnail {
+        height: 100px;
+        margin-bottom: 6px;
+        border-radius: 8px;
+    }
+
+    .video-title {
+        font-size: 12px;
+    }
+
+    .video-channel,
+    .video-stats {
+        font-size: 10px;
+    }
+
+    .short-card {
+        height: 220px;
+    }
+
+    .short-title {
+        font-size: 11px;
+    }
+
+    .content-section {
+        margin-bottom: 24px;
+    }
+}
+
+/* Móviles - 375px */
+@media (max-width: 375px) {
+    .header {
+        padding: 6px 10px;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .logo {
+        gap: 3px;
+        font-size: 14px;
+    }
+
+    .logo-icon {
+        font-size: 16px;
+    }
+
+    .search-bar {
+        border-radius: 14px;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+    }
+
+    .search-bar input {
+        display: none;
+    }
+
+    .search-btn {
+        background-color: transparent;
+        font-size: 18px;
+        padding: 6px;
+    }
+
+    .icon-btn {
+        font-size: 18px;
+        padding: 6px;
+    }
+
+    /* SIDEBAR COMO DRAWER */
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 56px;
+        height: calc(100vh - 56px);
+        width: 240px;
+        background-color: #181818;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding: 16px 0;
+        flex-direction: column;
+        border-right: 1px solid #3a3a3a;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-section {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #3a3a3a;
+        padding: 8px 0;
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+    }
+
+    .sidebar-title {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #aaa;
+        padding: 8px 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: #aaa;
+        flex-direction: row;
+        white-space: normal;
+    }
+
+    .sidebar-item:hover {
+        background-color: #272727;
+        color: #fff;
+    }
+
+    .sidebar-item .label {
+        font-size: 14px;
+    }
+
+    .home-content {
+        width: 100%;
+        padding: 6px;
+    }
+
+    .content-section h2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+
+    .shorts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 6px;
+    }
+
+    .video-thumbnail {
+        height: 120px;
+        margin-bottom: 5px;
+    }
+
+    .video-info {
+        gap: 6px;
+    }
+
+    .video-channel-avatar {
+        width: 30px;
+        height: 30px;
+    }
+
+    .video-title {
+        font-size: 11px;
+    }
+
+    .video-channel,
+    .video-stats {
+        font-size: 9px;
+    }
+
+    .short-card {
+        height: 180px;
+        padding: 10px;
+    }
+
+    .short-title {
+        font-size: 10px;
+    }
+
+    .content-section {
+        margin-bottom: 20px;
+    }
+}
+
+/* Móviles - 320px */
+@media (max-width: 320px) {
+    .header {
+        padding: 4px 8px;
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .logo {
+        gap: 2px;
+        font-size: 12px;
+    }
+
+    .logo-icon {
+        font-size: 14px;
+    }
+
+    .search-bar {
+        border-radius: 12px;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+    }
+
+    .search-bar input {
+        display: none;
+    }
+
+    .search-btn {
+        background-color: transparent;
+        font-size: 14px;
+        padding: 4px;
+    }
+
+    .icon-btn {
+        font-size: 16px;
+        padding: 4px;
+    }
+
+    /* SIDEBAR COMO DRAWER */
+    .main-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 56px;
+        height: calc(100vh - 56px);
+        width: 240px;
+        background-color: #181818;
+        z-index: 100;
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+        overflow-y: auto;
+        padding: 16px 0;
+        flex-direction: column;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .sidebar-section {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid #3a3a3a;
+        padding: 8px 0;
+    }
+
+    .sidebar-section:last-child {
+        border-bottom: none;
+    }
+
+    .sidebar-title {
+        display: block;
+        font-size: 12px;
+        font-weight: 500;
+        color: #aaa;
+        padding: 8px 20px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 12px 20px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        color: #aaa;
+        flex-direction: row;
+        white-space: normal;
+    }
+
+    .sidebar-padding {
+        display: none;
+    }
+
+    .home-content {
+        width: 100%;
+        padding: 4px;
+    }
+
+    .content-section h2 {
+        font-size: 12px;
+        margin-bottom: 8px;
+    }
+
+    .videos-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .shorts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+        gap: 5px;
+    }
+
+    .video-thumbnail {
+        height: 120px;
+        margin-bottom: 4px;
+    }
+
+    .video-info {
+        gap: 4px;
+    }
+
+    .video-channel-avatar {
+        width: 28px;
+        height: 28px;
+    }
+
+    .video-title {
+        font-size: 10px;
+    }
+
+    .video-channel,
+    .video-stats {
+        font-size: 8px;
+    }
+
+    .short-card {
+        height: 160px;
+        padding: 8px;
+    }
+
+    .short-title {
+        font-size: 9px;
+    }
+
+    .content-section {
+        margin-bottom: 16px;
+    }
+
+    .video-duration {
+        font-size: 9px;
+        padding: 1px 3px;
+    }
+}

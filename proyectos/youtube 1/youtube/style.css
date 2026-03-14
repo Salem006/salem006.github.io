@@ -1,0 +1,576 @@
+/* Estilos para el clon de YouTube */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background-color: #0f0f0f;
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* ========== HEADER ========== */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #212121;
+    padding: 12px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    gap: 20px;
+}
+
+/* Contenedor 1: Logo y búsqueda */
+.header-container-1 {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+}
+
+.hamburger-btn {
+    background-color: transparent;
+    border: none;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    margin-right: 10px;
+}
+
+.hamburger-line {
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+    border-radius: 1px;
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(8px, 8px);
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.logo-icon {
+    color: #ff0000;
+    font-size: 24px;
+}
+
+.logo-text {
+    color: #fff;
+    font-weight: 700;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    border: 1px solid #3a3a3a;
+    border-radius: 20px;
+    padding: 8px 12px;
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-bar input {
+    background-color: #121212;
+    border: none;
+    color: #fff;
+    padding: 4px 8px;
+    font-size: 14px;
+    flex: 1;
+    outline: none;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+
+.search-btn {
+    background-color: transparent;
+    border: none;
+    color: #999;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 8px;
+    margin-left: 4px;
+}
+
+.search-btn:hover {
+    color: #fff;
+}
+
+/* Contenedor 2: Filtros */
+.header-container-2 {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-btn,
+.sort-btn {
+    background-color: #272727;
+    border: 1px solid #3a3a3a;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover,
+.sort-btn:hover {
+    background-color: #3a3a3a;
+}
+
+/* Contenedor 3: Iconos de usuario */
+.header-container-3 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon-btn {
+    background-color: transparent;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.icon-btn:hover {
+    background-color: #272727;
+}
+
+/* ========== CONTENEDOR PRINCIPAL ========== */
+.main-container {
+    display: flex;
+    min-height: calc(100vh - 56px);
+}
+
+/* ========== OVERLAY PARA MOBILE ========== */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 56px);
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 99;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* ========== SIDEBAR ========== */
+.sidebar {
+    width: 240px;
+    background-color: #181818;
+    border-right: 1px solid #3a3a3a;
+    display: flex;
+    flex-direction: column;
+    padding: 16px 0;
+    overflow-y: auto;
+}
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 8px 0;
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+}
+
+.sidebar-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: #aaa;
+    padding: 8px 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: #aaa;
+}
+
+.sidebar-item:hover {
+    background-color: #272727;
+    color: #fff;
+}
+
+.sidebar-item.active {
+    background-color: #272727;
+    color: #fff;
+    font-weight: 500;
+}
+
+.sidebar-item .icon {
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-item .icon-img {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-item .label {
+    font-size: 14px;
+}
+
+.sidebar-item .label.terms {
+    font-size: 11px;
+    color: #999;
+}
+
+/* ========== CONTENIDO PRINCIPAL ========== */
+.home-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* ========== SECCIONES DE CONTENIDO ========== */
+.content-section {
+    margin-bottom: 40px;
+}
+
+.content-section h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #fff;
+}
+
+/* Grid para videos */
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+/* Grid para shorts */
+.shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+}
+
+/* Tarjeta de video */
+.video-card {
+    background-color: transparent;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.video-card:hover {
+    transform: scale(1.02);
+}
+
+.video-card:hover .video-thumbnail {
+    background-color: #3a3a3a;
+}
+
+.video-thumbnail {
+    width: 100%;
+    height: 135px;
+    background-color: #272727;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 14px;
+    position: relative;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.video-duration {
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.video-info {
+    display: flex;
+    gap: 8px;
+}
+
+.video-channel-avatar {
+    width: 36px;
+    height: 36px;
+    background-color: #272727;
+    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-channel-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.video-details {
+    flex: 1;
+}
+
+.video-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    margin-bottom: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.video-channel,
+.video-stats {
+    font-size: 12px;
+    color: #aaa;
+    margin-bottom: 2px;
+}
+
+.video-stats {
+    color: #aaa;
+}
+
+/* Tarjeta de short */
+.short-card {
+    background-color: #272727;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    height: 280px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+}
+
+.short-card:hover {
+    transform: scale(1.02);
+}
+
+.short-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.short-video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 12px;
+    object-fit: cover;
+    z-index: 1;
+}
+
+.short-card.has-video .short-placeholder {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.short-card.has-video .short-video {
+    opacity: 1;
+}
+
+.short-title {
+    position: relative;
+    z-index: 10;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* ========== MODAL PARA SHORTS ========== */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    position: relative;
+    background-color: #181818;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 32px;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    z-index: 1001;
+}
+
+.modal-close:hover {
+    color: #aaa;
+}
+
+.modal-video {
+    width: 100%;
+    height: auto;
+    max-height: 600px;
+    border-radius: 12px;
+    background-color: #0f0f0f;
+    margin-bottom: 12px;
+}
+
+.modal-title {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ========== SCROLL ========== */
+.sidebar::-webkit-scrollbar,
+.home-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.home-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.home-content::-webkit-scrollbar-thumb {
+    background-color: #3a3a3a;
+    border-radius: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover,
+.home-content::-webkit-scrollbar-thumb:hover {
+    background-color: #5a5a5a;
+}
