@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portafolio - Zuleyka Ortiz</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: url('Fondos/Fondo.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: auto;
+            position: relative;
+        }
+
+        /* Overlay oscuro sutil */
+        body::before {
+            content: '';
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, rgba(0, 0, 0, 0.1) 100%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            perspective: 1000px;
+            position: relative;
+            z-index: 10;
+            padding: 60px 40px;
+            max-width: 1200px;
+        }
+
+        /* Sección Principal - Perfil */
+        .profile-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        /* Circular Profile Picture with Border Effect */
+        .profile-circle {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid rgba(0, 100, 0, 0.8);
+            box-shadow: 0 0 40px rgba(0, 150, 0, 0.6), 0 0 80px rgba(0, 100, 0, 0.4) inset;
+            animation: pulseCircle 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes pulseCircle {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(0, 150, 0, 0.6), 0 0 80px rgba(0, 100, 0, 0.4) inset;
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(0, 200, 0, 0.8), 0 0 120px rgba(0, 150, 0, 0.6) inset;
+            }
+        }
+
+        /* Liquid Glass Card Principal */
+        .card {
+            width: 450px;
+            padding: 70px 50px;
+            position: relative;
+            border-radius: 30px;
+            text-align: center;
+            filter: url(#glass);
+            perspective: 1000px;
+            cursor: grab;
+            transition: transform 0.1s ease-out;
+            user-select: none;
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.35) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            border: 2.5px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            backdrop-filter: blur(15px) saturate(180%) brightness(1.1);
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.6),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+                0 0 60px rgba(0, 150, 0, 0.25) inset;
+            z-index: 1;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Highlight especular */
+        .card-highlight {
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-highlight {
+            opacity: 1;
+        }
+
+        /* Rim Light */
+        .card-rim {
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            pointer-events: none;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.3) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(0, 100, 200, 0.1) 100%
+            );
+            z-index: 4;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                width: 30px;
+                height: 30px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 400px;
+                height: 400px;
+                opacity: 0;
+            }
+        }
+
+        /* Title - PORTAFOLIO with Jelly Effect */
+        .title {
+            font-family: 'Gohtic', 'Old English Text', serif;
+            font-size: 56px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 150, 0, 0.6),
+                0 0 40px rgba(0, 100, 0, 0.4);
+            letter-spacing: 3px;
+            animation: jellyEffect 2s ease-in-out infinite;
+            font-style: italic;
+        }
+
+        @keyframes jellyEffect {
+            0%, 100% {
+                transform: scaleY(1);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 20px rgba(0, 150, 0, 0.6),
+                    0 0 40px rgba(0, 100, 0, 0.4);
+            }
+            25% {
+                transform: scaleY(0.95) scaleX(1.05);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 25px rgba(0, 200, 0, 0.7),
+                    0 0 50px rgba(0, 150, 0, 0.5);
+            }
+            50% {
+                transform: scaleY(1.05) scaleX(0.95);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(0, 200, 0, 0.8),
+                    0 0 60px rgba(0, 150, 0, 0.6);
+            }
+            75% {
+                transform: scaleY(0.95) scaleX(1.05);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 25px rgba(0, 200, 0, 0.7),
+                    0 0 50px rgba(0, 150, 0, 0.5);
+            }
+        }
+
+        /* Name - ZULEYKA ORTIZ */
+        .name {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            -webkit-text-stroke: 2.5px #004400;
+            text-stroke: 2.5px #004400;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6))
+                    drop-shadow(0 0 20px rgba(0, 150, 0, 0.6));
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Decorative Line */
+        .line {
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, transparent, rgba(0, 150, 0, 0.8), transparent);
+            margin: 25px auto;
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(0, 150, 0, 0.6);
+        }
+
+        /* Interactive particles background */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 150, 0, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 150, 0, 0.8);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+
+        /* Portfolio Grid Sections */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .portfolio-card {
+            width: 100%;
+            padding: 40px 30px;
+            position: relative;
+            border-radius: 25px;
+            text-align: center;
+            filter: url(#glass);
+            cursor: grab;
+            transition: transform 0.1s ease-out;
+        }
+
+        .portfolio-card:active {
+            cursor: grabbing;
+        }
+
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.3) 0%,
+                rgba(255, 255, 255, 0.12) 50%,
+                rgba(255, 255, 255, 0.03) 100%
+            );
+            border: 2px solid rgba(255, 255, 255, 0.35);
+            border-radius: 25px;
+            backdrop-filter: blur(12px) saturate(150%);
+            box-shadow: 
+                0 6px 24px rgba(31, 38, 135, 0.4),
+                inset 0 1px 1px rgba(255, 255, 255, 0.5),
+                0 0 40px rgba(0, 150, 0, 0.15) inset;
+            z-index: 1;
+        }
+
+        .portfolio-card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-card-highlight {
+            position: absolute;
+            top: -80%;
+            left: -80%;
+            width: 260%;
+            height: 260%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .portfolio-card:hover .portfolio-card-highlight {
+            opacity: 1;
+        }
+
+        .portfolio-card h3 {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .portfolio-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+
+        .portfolio-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .card {
+                width: 90%;
+                max-width: 400px;
+                padding: 50px 35px;
+            }
+
+            .title {
+                font-size: 42px;
+            }
+
+            .name {
+                font-size: 24px;
+            }
+
+            .profile-circle {
+                width: 220px;
+                height: 220px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <svg style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 0;" preserveAspectRatio="none">
+        <defs>
+            <filter id="glass" x="-50%" y="-50%" width="200%" height="200%" primitiveUnits="objectBoundingBox">
+                <!-- Capa de turbulencia para efecto granulado -->
+                <feTurbulence 
+                    type="fractalNoise" 
+                    baseFrequency="0.015" 
+                    numOctaves="4" 
+                    result="noise"
+                    seed="2"
+                    id="turbulence"
+                />
+                
+                <!-- Amplificación del noise -->
+                <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="noise"
+                    scale="18"
+                    xChannelSelector="R"
+                    yChannelSelector="G"
+                    result="displaced"
+                    id="displacement"
+                />
+                
+                <!-- Blur para suavizar -->
+                <feGaussianBlur 
+                    in="displaced" 
+                    stdDeviation="2" 
+                    result="blurred"
+                />
+                
+                <!-- Mezcla para efecto de vidrio -->
+                <feComponentTransfer in="blurred">
+                    <feFuncA type="linear" slope="0.8"/>
+                </feComponentTransfer>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="particles" id="particlesContainer"></div>
+
+    <div class="container">
+        <!-- Profile Principal Section -->
+        <div class="profile-section">
+            <!-- Profile Circle -->
+            <div class="profile-circle">
+                <img src="Logo/cara.jpg" alt="Zuleyka Ortiz">
+            </div>
+
+            <!-- Info Card with Liquid Glass -->
+            <div class="card">
+                <div class="title">PORTAFOLIO</div>
+                <div class="line"></div>
+                <div class="name">ZULEYKA ORTIZ</div>
+                <div class="line"></div>
+                <div class="card-highlight"></div>
+                <div class="card-rim"></div>
+            </div>
+        </div>
+
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid">
+            <!-- Card 1: Diseño -->
+            <div class="portfolio-card">
+                <div class="portfolio-card-highlight"></div>
+                <div class="portfolio-icon">🎨</div>
+                <h3>DISEÑO</h3>
+                <p>Gráfico y Visual</p>
+            </div>
+
+            <!-- Card 2: Desarrollo -->
+            <div class="portfolio-card">
+                <div class="portfolio-card-highlight"></div>
+                <div class="portfolio-icon">💻</div>
+                <h3>DESARROLLO</h3>
+                <p>Web Interactivo</p>
+            </div>
+
+            <!-- Card 3: Innovación -->
+            <div class="portfolio-card">
+                <div class="portfolio-card-highlight"></div>
+                <div class="portfolio-icon">⚡</div>
+                <h3>INNOVACIÓN</h3>
+                <p>Tecnología Avanzada</p>
+            </div>
+
+            <!-- Card 4: Experiencia -->
+            <div class="portfolio-card">
+                <div class="portfolio-card-highlight"></div>
+                <div class="portfolio-icon">🚀</div>
+                <h3>EXPERIENCIA</h3>
+                <p>Profesional y Creativa</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const card = document.querySelector('.card');
+        const portfolioCards = document.querySelectorAll('.portfolio-card');
+        const turbulence = document.getElementById('turbulence');
+        const displacement = document.getElementById('displacement');
+        const container = document.getElementById('particlesContainer');
+        
+        let animationTime = 0;
+        let draggedElement = null;
+        let dragOffset = { x: 0, y: 0 };
+        let mouse = { x: 0, y: 0 };
+
+        // Animación de "respiración" del filtro liquid glass
+        function animateLiquid() {
+            animationTime += 0.005;
+            
+            const baseFreq = 0.015 + Math.sin(animationTime) * 0.008;
+            const scale = 18 + Math.sin(animationTime * 0.7) * 4;
+            
+            turbulence.setAttribute('baseFrequency', baseFreq);
+            displacement.setAttribute('scale', scale);
+            
+            requestAnimationFrame(animateLiquid);
+        }
+
+        // Función para manejar interactividad del mouse en cards
+        function setupCardInteractivity(targetCard, isPortfolioCard = false) {
+            document.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+
+                const rect = targetCard.getBoundingClientRect();
+                const cardX = rect.left + rect.width / 2;
+                const cardY = rect.top + rect.height / 2;
+
+                const dx = mouse.x - cardX;
+                const dy = mouse.y - cardY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = 350;
+
+                if (distance < maxDistance) {
+                    const angle = Math.atan2(dy, dx);
+                    const strength = 1 - distance / maxDistance;
+
+                    const highlight = targetCard.querySelector(isPortfolioCard ? '.portfolio-card-highlight' : '.card-highlight');
+                    const highlightX = Math.cos(angle) * 120 * strength;
+                    const highlightY = Math.sin(angle) * 120 * strength;
+                    highlight.style.transform = `translate(${highlightX}px, ${highlightY}px)`;
+
+                    if (!draggedElement) {
+                        const rotationY = Math.sin(angle) * 3 * strength;
+                        const rotationX = -Math.cos(angle) * 3 * strength;
+                        
+                        targetCard.style.transform = `
+                            perspective(1200px) 
+                            rotateX(${rotationX}deg) 
+                            rotateY(${rotationY}deg) 
+                            scale(${1 + strength * 0.05})
+                        `;
+                    }
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                targetCard.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+                const highlight = targetCard.querySelector(isPortfolioCard ? '.portfolio-card-highlight' : '.card-highlight');
+                highlight.style.transform = 'translate(0, 0)';
+            });
+
+            // Click para ripple
+            targetCard.addEventListener('click', (e) => {
+                if (draggedElement) return;
+
+                const rect = targetCard.querySelector(isPortfolioCard ? '.portfolio-card-highlight' : '.card-highlight').parentElement.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.animation = 'rippleExpand 0.8s ease-out forwards';
+
+                targetCard.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 800);
+            });
+
+            // Drag
+            targetCard.addEventListener('mousedown', (e) => {
+                draggedElement = targetCard;
+                const rect = targetCard.getBoundingClientRect();
+                dragOffset.x = e.clientX - rect.left;
+                dragOffset.y = e.clientY - rect.top;
+            });
+        }
+
+        // Setup para card principal
+        setupCardInteractivity(card, false);
+
+        // Setup para portfolio cards
+        portfolioCards.forEach(pCard => {
+            setupCardInteractivity(pCard, true);
+        });
+
+        // Mouse drag global
+        document.addEventListener('mousemove', (e) => {
+            if (draggedElement) {
+                draggedElement.style.position = 'fixed';
+                draggedElement.style.left = (e.clientX - dragOffset.x) + 'px';
+                draggedElement.style.top = (e.clientY - dragOffset.y) + 'px';
+                draggedElement.style.zIndex = 2000;
+                draggedElement.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (draggedElement) {
+                draggedElement.style.position = 'relative';
+                draggedElement.style.left = 'auto';
+                draggedElement.style.top = 'auto';
+                draggedElement.style.zIndex = 'auto';
+            }
+            draggedElement = null;
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 25;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (15 + Math.random() * 20) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createParticles();
+            animateLiquid();
+        });
+    </script>
+</body>
+</html>
+
+        /* Circular Profile Picture with Border Effect */
+        .profile-circle {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(0, 100, 0, 0.8);
+            box-shadow: 0 0 40px rgba(0, 150, 0, 0.6), 0 0 80px rgba(0, 100, 0, 0.4) inset;
+            animation: pulseCircle 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        .profile-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @keyframes pulseCircle {
+            0%, 100% {
+                box-shadow: 0 0 40px rgba(0, 150, 0, 0.6), 0 0 80px rgba(0, 100, 0, 0.4) inset;
+            }
+            50% {
+                box-shadow: 0 0 60px rgba(0, 200, 0, 0.8), 0 0 120px rgba(0, 150, 0, 0.6) inset;
+            }
+        }
+
+        /* Liquid Glass Card */
+        .card {
+            width: 400px;
+            padding: 60px 40px;
+            position: relative;
+            border-radius: 30px;
+            text-align: center;
+            filter: url(#glass);
+            perspective: 1000px;
+            cursor: grab;
+            transition: transform 0.1s ease-out;
+            user-select: none;
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.35) 0%,
+                rgba(255, 255, 255, 0.15) 50%,
+                rgba(255, 255, 255, 0.05) 100%
+            );
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 30px;
+            backdrop-filter: blur(15px) saturate(180%) brightness(1.1);
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.5),
+                inset 0 1px 2px rgba(255, 255, 255, 0.6),
+                inset 0 -1px 2px rgba(0, 0, 0, 0.3),
+                0 0 50px rgba(0, 150, 0, 0.2) inset;
+            z-index: 1;
+        }
+
+        .card > * {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Highlight especular */
+        .card-highlight {
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover .card-highlight {
+            opacity: 1;
+        }
+
+        /* Rim Light - borde brillante */
+        .card-rim {
+            position: absolute;
+            inset: 0;
+            border-radius: 30px;
+            pointer-events: none;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.3) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(0, 100, 200, 0.1) 100%
+            );
+            z-index: 4;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                width: 30px;
+                height: 30px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* Title - PORTAFOLIO with Jelly Effect */
+        .title {
+            font-family: 'Gohtic', 'Old English Text', serif;
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-shadow: 
+                0 5px 15px rgba(0, 0, 0, 0.8),
+                0 0 20px rgba(0, 150, 0, 0.6),
+                0 0 40px rgba(0, 100, 0, 0.4);
+            letter-spacing: 3px;
+            animation: jellyEffect 2s ease-in-out infinite;
+            font-style: italic;
+        }
+
+        @keyframes jellyEffect {
+            0%, 100% {
+                transform: scaleY(1);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 20px rgba(0, 150, 0, 0.6),
+                    0 0 40px rgba(0, 100, 0, 0.4);
+            }
+            25% {
+                transform: scaleY(0.95) scaleX(1.05);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 25px rgba(0, 200, 0, 0.7),
+                    0 0 50px rgba(0, 150, 0, 0.5);
+            }
+            50% {
+                transform: scaleY(1.05) scaleX(0.95);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 30px rgba(0, 200, 0, 0.8),
+                    0 0 60px rgba(0, 150, 0, 0.6);
+            }
+            75% {
+                transform: scaleY(0.95) scaleX(1.05);
+                text-shadow: 
+                    0 5px 15px rgba(0, 0, 0, 0.8),
+                    0 0 25px rgba(0, 200, 0, 0.7),
+                    0 0 50px rgba(0, 150, 0, 0.5);
+            }
+        }
+
+        /* Name - ZULEYKA ORTIZ */
+        .name {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #ffffff;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            -webkit-text-stroke: 2px #004400;
+            text-stroke: 2px #004400;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.6))
+                    drop-shadow(0 0 15px rgba(0, 150, 0, 0.5));
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Decorative Line */
+        .line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, rgba(0, 150, 0, 0.8), transparent);
+            margin: 25px auto;
+            border-radius: 2px;
+            box-shadow: 0 0 10px rgba(0, 150, 0, 0.6);
+        }
+
+        /* Interactive particles background */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(0, 150, 0, 0.6);
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 150, 0, 0.8);
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) translateX(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) translateX(100px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .card {
+                width: 90%;
+                max-width: 400px;
+                padding: 40px 30px;
+            }
+
+            .title {
+                font-size: 36px;
+            }
+
+            .name {
+                font-size: 22px;
+            }
+
+            .profile-circle {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <svg style="position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: 1;" preserveAspectRatio="none">
+        <defs>
+            <filter id="glass" x="-50%" y="-50%" width="200%" height="200%" primitiveUnits="objectBoundingBox">
+                <!-- Capa de turbulencia para efecto granulado -->
+                <feTurbulence 
+                    type="fractalNoise" 
+                    baseFrequency="0.015" 
+                    numOctaves="4" 
+                    result="noise"
+                    seed="2"
+                    id="turbulence"
+                />
+                
+                <!-- Amplificación del noise -->
+                <feDisplacementMap
+                    in="SourceGraphic"
+                    in2="noise"
+                    scale="18"
+                    xChannelSelector="R"
+                    yChannelSelector="G"
+                    result="displaced"
+                    id="displacement"
+                />
+                
+                <!-- Blur para suavizar -->
+                <feGaussianBlur 
+                    in="displaced" 
+                    stdDeviation="2" 
+                    result="blurred"
+                />
+                
+                <!-- Mezcla para efecto de vidrio -->
+                <feComponentTransfer in="blurred">
+                    <feFuncA type="linear" slope="0.8"/>
+                </feComponentTransfer>
+            </filter>
+        </defs>
+    </svg>
+
+    <div class="particles" id="particlesContainer"></div>
+
+    <div class="container">
+        <!-- Profile Circle -->
+        <div class="profile-circle">
+            <img src="Logo/cara.jpg" alt="Zuleyka Ortiz">
+        </div>
+
+        <!-- Info Card with Liquid Glass -->
+        <div class="card">
+            <div class="title">PORTAFOLIO</div>
+            <div class="line"></div>
+            <div class="name">ZULEYKA ORTIZ</div>
+            <div class="line"></div>
+            <div class="card-highlight"></div>
+            <div class="card-rim"></div>
+        </div>
+    </div>
+
+    <script>
+        const card = document.querySelector('.card');
+        const turbulence = document.getElementById('turbulence');
+        const displacement = document.getElementById('displacement');
+        const container = document.getElementById('particlesContainer');
+        
+        let animationTime = 0;
+        let draggedCard = null;
+        let dragOffset = { x: 0, y: 0 };
+        let mouse = { x: 0, y: 0 };
+
+        // Animación de "respiración" del filtro liquid glass
+        function animateLiquid() {
+            animationTime += 0.005;
+            
+            // Frecuencia que cambia suavemente (respiración)
+            const baseFreq = 0.015 + Math.sin(animationTime) * 0.008;
+            const scale = 18 + Math.sin(animationTime * 0.7) * 4;
+            
+            turbulence.setAttribute('baseFrequency', baseFreq);
+            displacement.setAttribute('scale', scale);
+            
+            requestAnimationFrame(animateLiquid);
+        }
+
+        // Tracking del mouse para el highlight
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            const rect = card.getBoundingClientRect();
+            const glassX = rect.left + rect.width / 2;
+            const glassY = rect.top + rect.height / 2;
+
+            const dx = mouse.x - glassX;
+            const dy = mouse.y - glassY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = 300;
+
+            if (distance < maxDistance) {
+                const angle = Math.atan2(dy, dx);
+                const strength = 1 - distance / maxDistance;
+
+                // Mover highlight especular
+                const highlight = card.querySelector('.card-highlight');
+                const highlightX = Math.cos(angle) * 120 * strength;
+                const highlightY = Math.sin(angle) * 120 * strength;
+                highlight.style.transform = `translate(${highlightX}px, ${highlightY}px)`;
+
+                // Pequeña deformación 3D del card
+                const rotationY = Math.sin(angle) * 3 * strength;
+                const rotationX = -Math.cos(angle) * 3 * strength;
+                
+                if (!draggedCard) {
+                    card.style.transform = `
+                        perspective(1200px) 
+                        rotateX(${rotationX}deg) 
+                        rotateY(${rotationY}deg) 
+                        scale(${1 + strength * 0.05})
+                    `;
+                }
+            }
+        });
+
+        // Click para crear ripple effect
+        card.addEventListener('click', (e) => {
+            if (draggedCard) return; // No crear ripple si se está arrastrando
+
+            const rect = card.querySelector('.card-highlight').parentElement.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.style.animation = 'rippleExpand 0.8s ease-out forwards';
+
+            card.appendChild(ripple);
+
+            setTimeout(() => ripple.remove(), 800);
+        });
+
+        // Drag functionality
+        card.addEventListener('mousedown', (e) => {
+            draggedCard = true;
+            const rect = card.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (draggedCard) {
+                card.style.position = 'fixed';
+                card.style.left = (e.clientX - dragOffset.x) + 'px';
+                card.style.top = (e.clientY - dragOffset.y) + 'px';
+                card.style.zIndex = 1000;
+                card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (draggedCard) {
+                draggedCard = null;
+                card.style.position = 'relative';
+                card.style.left = 'auto';
+                card.style.top = 'auto';
+                card.style.zIndex = 'auto';
+            }
+        });
+
+        // Reset efectos quando sale el mouse
+        document.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
+            const highlight = card.querySelector('.card-highlight');
+            highlight.style.transform = 'translate(0, 0)';
+        });
+
+        // Create floating particles
+        function createParticles() {
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDuration = (15 + Math.random() * 20) + 's';
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createParticles();
+            animateLiquid();
+        });
+    </script>
+</body>
+</html>

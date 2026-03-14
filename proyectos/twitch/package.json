@@ -1,0 +1,26 @@
+{
+  "name": "twitch-interface-clone",
+  "version": "1.0.0",
+  "description": "Una interfaz espejo completa de la plataforma Twitch con diseño responsivo e interactividad",
+  "main": "index.html",
+  "scripts": {
+    "start": "Open index.html in your browser",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "twitch",
+    "clone",
+    "interface",
+    "streaming",
+    "html5",
+    "css3",
+    "javascript"
+  ],
+  "author": "Developer",
+  "license": "MIT",
+  "technologies": {
+    "markup": "HTML5",
+    "styling": "CSS3 (Grid, Flexbox, Gradients)",
+    "scripting": "JavaScript (Vanilla - No frameworks)"
+  }
+}

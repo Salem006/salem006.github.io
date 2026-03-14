@@ -1,0 +1,158 @@
+{
+  "canales": [
+    {
+      "id": 1,
+      "nombre": "ProGamer123",
+      "descripcion": "Streamer profesional de juegos competitivos",
+      "juego_actual": "Valorant",
+      "espectadores": 12500,
+      "seguidores": 285000,
+      "avatar": "img/avatars/progamer123.jpg",
+      "banner": "img/banners/progamer123.jpg",
+      "en_vivo": true,
+      "url": "canales/progamer123"
+    },
+    {
+      "id": 2,
+      "nombre": "TwitchStreamer",
+      "descripcion": "Variedad de contenidos - Juegos, charlas y más",
+      "juego_actual": "Just Chatting",
+      "espectadores": 8300,
+      "seguidores": 165000,
+      "avatar": "img/avatars/twitchstreamer.jpg",
+      "banner": "img/banners/twitchstreamer.jpg",
+      "en_vivo": true,
+      "url": "canales/twitchstreamer"
+    },
+    {
+      "id": 3,
+      "nombre": "MusicaLive",
+      "descripcion": "Conciertos y transmisiones musicales en vivo",
+      "juego_actual": "Música",
+      "espectadores": 45200,
+      "seguidores": 512000,
+      "avatar": "img/avatars/musicalive.jpg",
+      "banner": "img/banners/musicalive.jpg",
+      "en_vivo": true,
+      "url": "canales/musicalive"
+    },
+    {
+      "id": 4,
+      "nombre": "DevMaster",
+      "descripcion": "Programación, desarrollo de software y tecnología",
+      "juego_actual": "Creativo",
+      "espectadores": 5600,
+      "seguidores": 98000,
+      "avatar": "img/avatars/devmaster.jpg",
+      "banner": "img/banners/devmaster.jpg",
+      "en_vivo": true,
+      "url": "canales/devmaster"
+    },
+    {
+      "id": 5,
+      "nombre": "EsportsTV",
+      "descripcion": "Campeonatos y torneos de deportes electrónicos",
+      "juego_actual": "Deportes Electrónicos",
+      "espectadores": 156300,
+      "seguidores": 2100000,
+      "avatar": "img/avatars/eportstv.jpg",
+      "banner": "img/banners/eportstv.jpg",
+      "en_vivo": true,
+      "url": "canales/eportstv"
+    },
+    {
+      "id": 6,
+      "nombre": "CineClub",
+      "descripcion": "Películas clásicas, estrenos y análisis cinematográfico",
+      "juego_actual": "Películas",
+      "espectadores": 23400,
+      "seguidores": 450000,
+      "avatar": "img/avatars/cineclub.jpg",
+      "banner": "img/banners/cineclub.jpg",
+      "en_vivo": true,
+      "url": "canales/cineclub"
+    },
+    {
+      "id": 7,
+      "nombre": "SpeedRunner",
+      "descripcion": "Speedruns de juegos clásicos y modernos",
+      "juego_actual": "Juegos",
+      "espectadores": 3200,
+      "seguidores": 75000,
+      "avatar": "img/avatars/speedrunner.jpg",
+      "banner": "img/banners/speedrunner.jpg",
+      "en_vivo": true,
+      "url": "canales/speedrunner"
+    },
+    {
+      "id": 8,
+      "nombre": "FitCoach",
+      "descripcion": "Entrenamientos en vivo y coaching de fitness",
+      "juego_actual": "Fitness",
+      "espectadores": 7800,
+      "seguidores": 125000,
+      "avatar": "img/avatars/fitcoach.jpg",
+      "banner": "img/banners/fitcoach.jpg",
+      "en_vivo": true,
+      "url": "canales/fitcoach"
+    }
+  ],
+  "categorias": [
+    {
+      "id": 1,
+      "nombre": "Juegos",
+      "icono": "🎮",
+      "espectadores": 1200000,
+      "descripcion": "Juegos de video en vivo"
+    },
+    {
+      "id": 2,
+      "nombre": "Just Chatting",
+      "icono": "💬",
+      "espectadores": 856000,
+      "descripcion": "Conversaciones y charlas casual"
+    },
+    {
+      "id": 3,
+      "nombre": "Música",
+      "icono": "🎵",
+      "espectadores": 543000,
+      "descripcion": "Conciertos y transmisiones musicales"
+    },
+    {
+      "id": 4,
+      "nombre": "Películas y TV",
+      "icono": "🎬",
+      "espectadores": 412000,
+      "descripcion": "Películas, series y entretenimiento"
+    },
+    {
+      "id": 5,
+      "nombre": "Fitness",
+      "icono": "🏋️",
+      "espectadores": 234000,
+      "descripcion": "Ejercicios y entrenamientos en vivo"
+    },
+    {
+      "id": 6,
+      "nombre": "Creativo",
+      "icono": "🎨",
+      "espectadores": 189000,
+      "descripcion": "Arte, diseño y creatividad"
+    },
+    {
+      "id": 7,
+      "nombre": "Deportes Electrónicos",
+      "icono": "🏆",
+      "espectadores": 892000,
+      "descripcion": "Campeonatos y torneos de esports"
+    },
+    {
+      "id": 8,
+      "nombre": "IRL",
+      "icono": "🌍",
+      "espectadores": 145000,
+      "descripcion": "Transmisiones en la vida real"
+    }
+  ]
+}

@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquid Glass - Efecto Interactivo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 25%, #0f3460 50%, #533483 75%, #1a1a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Capa de contenido detrás del vidrio */
+        .background-content {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 100, 150, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(100, 150, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 50% 0%, rgba(150, 100, 255, 0.1) 0%, transparent 50%);
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-text {
+            position: absolute;
+            font-size: 2rem;
+            font-weight: bold;
+            color: rgba(255, 255, 255, 0.05);
+            pointer-events: none;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .floating-text:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+        .floating-text:nth-child(2) { top: 30%; right: 10%; animation-delay: 2s; }
+        .floating-text:nth-child(3) { bottom: 20%; left: 15%; animation-delay: 4s; }
+
+        /* Contenedor principal */
+        .container {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            max-width: 1400px;
+        }
+
+        /* Elemento Liquid Glass */
+        .liquid-glass {
+            position: relative;
+            border-radius: 24px;
+            cursor: grab;
+            user-select: none;
+            filter: url(#liquidFilter);
+            transition: transform 0.1s ease-out;
+        }
+
+        .liquid-glass:active {
+            cursor: grabbing;
+        }
+
+        /* Tamaño grande */
+        .glass-large {
+            width: 320px;
+            height: 280px;
+        }
+
+        /* Tamaño mediano */
+        .glass-medium {
+            width: 240px;
+            height: 240px;
+        }
+
+        /* Tamaño pequeño */
+        .glass-small {
+            width: 180px;
+            height: 180px;
+        }
+
+        /* Capa principal del vidrio */
+        .glass-layer {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.08) 50%,
+                rgba(255, 255, 255, 0.02) 100%
+            );
+            backdrop-filter: blur(12px) saturate(180%) brightness(1.1);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+                inset 0 0 30px rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        /* Highlight especular que sigue al mouse */
+        .glass-highlight {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .liquid-glass:hover .glass-highlight {
+            opacity: 1;
+        }
+
+        /* Contenido interior */
+        .glass-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 20px;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .glass-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .glass-content p {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            line-height: 1.4;
+        }
+
+        .glass-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+
+        /* Rim Light - borde brillante */
+        .glass-rim {
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            pointer-events: none;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.3) 0%,
+                transparent 40%,
+                transparent 60%,
+                rgba(0, 100, 200, 0.1) 100%
+            );
+            z-index: 4;
+        }
+
+        /* Ripple effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes rippleExpand {
+            0% {
+                width: 30px;
+                height: 30px;
+                opacity: 0.8;
+            }
+            100% {
+                width: 300px;
+                height: 300px;
+                opacity: 0;
+            }
+        }
+
+        /* Instrucciones */
+        .instructions {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 15px 25px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            max-width: 300px;
+        }
+
+        .instructions h4 {
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .instructions ul {
+            list-style: none;
+        }
+
+        .instructions li {
+            margin: 4px 0;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .instructions li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .glass-large {
+                width: 240px;
+                height: 200px;
+            }
+
+            .instructions {
+                font-size: 0.8rem;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- SVG Filters -->
+    <svg style="position: fixed; width: 0; height: 0;">
+        <defs>
+            <filter id="liquidFilter" x="-50%" y="-50%" width="200%" height="200%">
+                <!-- Generador de ruido para efecto turbulento -->
+                <feTurbulence 
+                    type="fractalNoise" 
+                    baseFrequency="0.015" 
+                    numOctaves="3" 
+                    result="noise"
+                    seed="2"
+                    id="turbulence"
+                />
+                
+                <!-- Desplazamiento basado en ruido -->
+                <feDisplacementMap 
+                    in="SourceGraphic" 
+                    in2="noise" 
+                    scale="18" 
+                    xChannelSelector="R" 
+                    yChannelSelector="G"
+                    id="displacement"
+                />
+            </filter>
+        </defs>
+    </svg>
+
+    <!-- Contenido de fondo -->
+    <div class="background-content">
+        <div class="floating-text">✨ LIQUID GLASS ✨</div>
+        <div class="floating-text">DISEÑO INTERACTIVO</div>
+        <div class="floating-text">EFECTO FLUIDO</div>
+    </div>
+
+    <!-- Contenedor principal -->
+    <div class="container">
+        <!-- Elemento 1: Grande - PORTAFOLIO -->
+        <div class="liquid-glass glass-large" data-size="large">
+            <div class="glass-layer">
+                <div class="glass-content">
+                    <div class="glass-icon">💼</div>
+                    <h3>PORTAFOLIO</h3>
+                    <p>Proyectos destacados</p>
+                </div>
+                <div class="glass-highlight"></div>
+            </div>
+            <div class="glass-rim"></div>
+        </div>
+
+        <!-- Elemento 2: Mediano - DISEÑO -->
+        <div class="liquid-glass glass-medium" data-size="medium">
+            <div class="glass-layer">
+                <div class="glass-content">
+                    <div class="glass-icon">🎨</div>
+                    <h3>DISEÑO</h3>
+                    <p>Experiencia Visual</p>
+                </div>
+                <div class="glass-highlight"></div>
+            </div>
+            <div class="glass-rim"></div>
+        </div>
+
+        <!-- Elemento 3: Pequeño - INTERACTIVO -->
+        <div class="liquid-glass glass-small" data-size="small">
+            <div class="glass-layer">
+                <div class="glass-content">
+                    <div class="glass-icon">⚡</div>
+                    <h3>FLUIDO</h3>
+                    <p>Dinámico</p>
+                </div>
+                <div class="glass-highlight"></div>
+            </div>
+            <div class="glass-rim"></div>
+        </div>
+
+        <!-- Elemento 4: Grande - INNOVACIÓN -->
+        <div class="liquid-glass glass-large" data-size="large">
+            <div class="glass-layer">
+                <div class="glass-content">
+                    <div class="glass-icon">🚀</div>
+                    <h3>INNOVACIÓN</h3>
+                    <p>Tecnología Avanzada</p>
+                </div>
+                <div class="glass-highlight"></div>
+            </div>
+            <div class="glass-rim"></div>
+        </div>
+    </div>
+
+    <!-- Instrucciones -->
+    <div class="instructions">
+        <h4>Interactividad</h4>
+        <ul>
+            <li>Mueve el mouse sobre los elementos</li>
+            <li>Haz clic para crear ondas</li>
+            <li>Arrastra los elementos por la pantalla</li>
+        </ul>
+    </div>
+
+    <script>
+        const liquidGlasses = document.querySelectorAll('.liquid-glass');
+        const turbulence = document.getElementById('turbulence');
+        const displacement = document.getElementById('displacement');
+        
+        let mouse = { x: 0, y: 0 };
+        let animationTime = 0;
+
+        // Animación de "respiración" del filtro
+        function animateLiquid() {
+            animationTime += 0.005;
+            
+            // Frecuencia que cambia suavemente
+            const baseFreq = 0.015 + Math.sin(animationTime) * 0.005;
+            const scale = 18 + Math.sin(animationTime * 0.7) * 3;
+            
+            turbulence.setAttribute('baseFrequency', baseFreq);
+            displacement.setAttribute('scale', scale);
+            
+            requestAnimationFrame(animateLiquid);
+        }
+
+        // Tracking del mouse
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+
+            liquidGlasses.forEach(glass => {
+                const rect = glass.getBoundingClientRect();
+                const glassX = rect.left + rect.width / 2;
+                const glassY = rect.top + rect.height / 2;
+
+                const dx = mouse.x - glassX;
+                const dy = mouse.y - glassY;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                const maxDistance = 300;
+
+                if (distance < maxDistance) {
+                    const angle = Math.atan2(dy, dx);
+                    const strength = 1 - distance / maxDistance;
+
+                    // Mover highlight especular
+                    const highlight = glass.querySelector('.glass-highlight');
+                    const highlightX = Math.cos(angle) * 100 * strength;
+                    const highlightY = Math.sin(angle) * 100 * strength;
+                    highlight.style.transform = `translate(${highlightX}px, ${highlightY}px)`;
+
+                    // Pequeña deformación del elemento
+                    const rotation = Math.sin(angle) * 2 * strength;
+                    glass.style.transform = `perspective(1000px) rotateY(${rotation}deg) scale(${1 + strength * 0.05})`;
+                }
+            });
+        });
+
+        // Click para crear ripple
+        liquidGlasses.forEach(glass => {
+            glass.addEventListener('click', (e) => {
+                const rect = glass.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const ripple = document.createElement('div');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.animation = 'rippleExpand 0.8s ease-out forwards';
+
+                glass.querySelector('.glass-layer').appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+
+        // Drag functionality
+        const draggables = document.querySelectorAll('.liquid-glass');
+        let draggedElement = null;
+        let offset = { x: 0, y: 0 };
+
+        draggables.forEach(element => {
+            element.addEventListener('mousedown', (e) => {
+                draggedElement = element;
+                const rect = element.getBoundingClientRect();
+                offset.x = e.clientX - rect.left;
+                offset.y = e.clientY - rect.top;
+            });
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (draggedElement) {
+                draggedElement.style.position = 'fixed';
+                draggedElement.style.left = (e.clientX - offset.x) + 'px';
+                draggedElement.style.top = (e.clientY - offset.y) + 'px';
+                draggedElement.style.zIndex = 1000;
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (draggedElement) {
+                draggedElement.style.position = 'relative';
+                draggedElement.style.left = 'auto';
+                draggedElement.style.top = 'auto';
+                draggedElement.style.zIndex = 'auto';
+            }
+            draggedElement = null;
+        });
+
+        // Mouse leave reset
+        document.addEventListener('mouseleave', () => {
+            liquidGlasses.forEach(glass => {
+                glass.style.transform = 'perspective(1000px) rotateY(0deg) scale(1)';
+                const highlight = glass.querySelector('.glass-highlight');
+                highlight.style.transform = 'translate(0, 0)';
+            });
+        });
+
+        // Iniciar animación
+        animateLiquid();
+    </script>
+</body>
+</html>
